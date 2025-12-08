@@ -1,28 +1,43 @@
 {
-  "name": "@yiero/vite-plugin-scriptcat-require-self",
-  "version": "1.0.0",
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
-    }
-  },
-  "main": "./dist/index.cjs",
-  "types": "./dist/index.d.ts",
-  "files": [
-    "dist",
-    "LICENSE"
-  ],
-  "scripts": {
-    "build": "rslib build",
-    "dev": "rslib build --watch"
-  },
-  "devDependencies": {
-    "@rslib/core": "^0.18.3",
-    "@types/node": "^24.10.1",
-    "typescript": "^5.9.3",
-    "vite": "^7.2.7"
-  }
+	"name": "@yiero/vite-plugin-scriptcat-require-self",
+	"description": "A vite plugin to inject locally file reference for web script like  TamperMonkey or ScriptCat",
+	"version": "1.0.0",
+	"type": "module",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
+		}
+	},
+	"main": "./dist/index.cjs",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"dist",
+		"LICENSE"
+	],
+	"scripts": {
+		"build": "rslib build",
+		"dev": "rslib build --watch"
+	},
+	"devDependencies": {
+		"@rslib/core": "^0.18.3",
+		"@types/node": "^24.10.1",
+		"typescript": "^5.9.3",
+		"vite": "^7.2.7"
+	},
+	"license": "GPL-3.0",
+	"publishConfig": {
+		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/AliubYiero/vite-plugin-scriptcat-require-self.git"
+	},
+	"keywords": [
+		"vite",
+		"plugin",
+		"scriptcat",
+		"tampermonkey"
+	]
 }
