@@ -30,7 +30,7 @@ pnpm add @yiero/vite-plugin-scriptcat-require-self -D
 
 ```ts
 import { defineConfig } from 'vite'
-import scriptCatRequireSelf from '@yiero/vite-plugin-scriptcat-require-self'
+import requireSelfPlugin from '@yiero/vite-plugin-scriptcat-require-self'
 
 export default defineConfig( ( env ) => {
 	/*
@@ -42,7 +42,7 @@ export default defineConfig( ( env ) => {
         
         // 如果是开发环境则输出 true, 自动注入本地文件引用
         // 反之输出 false, 插件不进行任何工作
-        scriptCatRequireSelf( isDevelopment )
+        requireSelfPlugin( isDevelopment )
 	],	
 })
 ```

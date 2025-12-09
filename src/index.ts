@@ -14,7 +14,7 @@ import type { Plugin } from 'vite';
  *
  * 如果该行已存在，则跳过插入，避免重复。
  */
-export default function scriptCatRequireSelf( isInsert: boolean = true ): Plugin {
+export default function requireSelfPlugin( isInsert: boolean = true ): Plugin {
 	/**
 	 * 绝对输出目录
 	 */

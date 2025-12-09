@@ -28,7 +28,7 @@ Add the plugin to your `vite.config.js`:
 
 ```ts
 import { defineConfig } from 'vite'
-import scriptCatRequireSelf from '@yiero/vite-plugin-scriptcat-require-self'
+import requireSelfPlugin from '@yiero/vite-plugin-scriptcat-require-self'
 
 export default defineConfig( ( env ) => {
 	/*
@@ -40,7 +40,7 @@ export default defineConfig( ( env ) => {
         
         // If in development environment, outputs true and automatically injects local file reference
         // Otherwise outputs false and the plugin does nothing
-        scriptCatRequireSelf( isDevelopment )
+        requireSelfPlugin( isDevelopment )
 	],	
 })
 ```
