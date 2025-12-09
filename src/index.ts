@@ -1,6 +1,7 @@
 import { join, resolve } from 'path';
 import { pathToFileURL } from 'url';
 import type { Plugin } from 'vite';
+import { ParseUserScript } from './types/UserScript.ts';
 
 /**
  * Vite 插件：
@@ -19,10 +20,21 @@ export default function requireSelfPlugin( isInsert: boolean = true ): Plugin {
 	 * 绝对输出目录
 	 */
 	let outDirAbsolute = '';
+	let parsedUserScript: ParseUserScript | undefined;
+	
 	
 	return {
 		name: 'vite-plugin-scriptcat-require-self',
 		version: '1.0.0',
+		
+		/**
+		 * 获取 vite-plugin-scriptcat-meta-banner 脚本导出的 UserScript
+		 */
+		buildStart( { plugins } ) {
+			const metaPlugin = plugins.find( plugin => plugin.name === 'vite-plugin-scriptcat-meta-banner' );
+			if ( !metaPlugin ) return;
+			parsedUserScript = metaPlugin.api.parsedUserScript;
+		},
 		
 		/**
 		 * 在 Vite 配置解析完成后，缓存绝对输出目录路径。
@@ -62,10 +74,18 @@ export default function requireSelfPlugin( isInsert: boolean = true ): Plugin {
 						continue;
 					}
 					
-					// 获取前一个键名的长度用于对齐
-					const [ _, space = ' ', key ] = trimmedCode.match( /\/\/(\s*)@(\w+\s+).*\r?\n\/\/\s*==\/UserScript==/ ) || [];
-					const indent = key ? key.length - 4 : 0;
-					const requireSelfLine = `//${ space }@${ 'require'.padEnd( indent, ' ' ) }    ${ fileUrl }\n`;
+					let indent: number = 0;
+					if ( parsedUserScript ) {
+						indent = parsedUserScript.maxKeyLength;
+					}
+					else {
+						// 获取前一个键名的长度用于对齐
+						const [ , , key ] = trimmedCode.match( /\/\/(\s*)@(\w+\s+).*\r?\n\/\/\s*==\/UserScript==/ ) || [];
+						indent = key ? key.length - 4 : 0;
+					}
+					
+					
+					const requireSelfLine = `// @${ 'require'.padEnd( indent, ' ' ) }    ${ fileUrl }\n`;
 					
 					// 定位插入位置：紧邻 // ==/UserScript== 之前
 					const insertPosition = userScriptEndMatch.index;
