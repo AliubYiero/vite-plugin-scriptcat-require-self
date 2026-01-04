@@ -1,5 +1,3 @@
-# 网页脚本自我引用插件
-
 # Vite Plugin ScriptCat Require Self
 
 [English](./README.md) / 中文

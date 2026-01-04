@@ -18,7 +18,8 @@
 	],
 	"scripts": {
 		"build": "rslib build",
-		"dev": "rslib build --watch"
+		"dev": "rslib build --watch",
+		"publish": "npm run build & npm publish"
 	},
 	"devDependencies": {
 		"@rslib/core": "^0.18.3",

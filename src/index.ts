@@ -31,6 +31,7 @@ export default function requireSelfPlugin( isInsert: boolean = true ): Plugin {
 		 * 获取 vite-plugin-scriptcat-meta-banner 脚本导出的 UserScript
 		 */
 		buildStart( { plugins } ) {
+			if ( !Array.isArray( plugins ) ) return;
 			const metaPlugin = plugins.find( plugin => plugin.name === 'vite-plugin-scriptcat-meta-banner' );
 			if ( !metaPlugin ) return;
 			parsedUserScript = metaPlugin.api.parsedUserScript;
@@ -51,7 +52,7 @@ export default function requireSelfPlugin( isInsert: boolean = true ): Plugin {
 		 */
 		generateBundle: {
 			order: 'post',  // 后执行
-			handler( _, bundle ) {
+			handler( options, bundle ) {
 				// 判断是否需要执行
 				if ( !isInsert ) return;
 				
